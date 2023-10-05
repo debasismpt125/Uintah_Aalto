@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 1997-2023 The University of Utah
+ * Copyright (c) 1997-2021 The University of Utah
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -43,7 +43,7 @@
 #endif
 
 #include <CCA/Components/MPM/Materials/ConstitutiveModel/Kayenta.h>
-//#include <CCA/Components/MPM/Materials/ConstitutiveModel/Diamm.h>
+#include <CCA/Components/MPM/Materials/ConstitutiveModel/Diamm.h>
 #include <CCA/Components/MPM/Materials/ConstitutiveModel/HypoElasticImplicit.h>
 #include <CCA/Components/MPM/Materials/ConstitutiveModel/MWViscoElastic.h>
 #include <CCA/Components/MPM/Materials/ConstitutiveModel/ProgramBurn.h>
@@ -79,7 +79,8 @@
 #include <CCA/Components/MPM/Materials/ConstitutiveModel/SoilModels/HypoplasticB.h>
 #include <CCA/Components/MPM/Materials/ConstitutiveModel/SoilModels/MohrCoulomb.h>
 #include <CCA/Components/MPM/Materials/ConstitutiveModel/SoilModels/QADamage.h>
-
+#include <CCA/Components/MPM/Materials/ConstitutiveModel/SoilModels/BBM.h>
+#include <CCA/Components/MPM/Materials/ConstitutiveModel/SoilModels/MatsuokaNakai.h>
 #include <CCA/Components/MPM/Core/MPMFlags.h>
 
 #include <Core/Exceptions/ProblemSetupException.h>
@@ -242,9 +243,9 @@ ConstitutiveModel* ConstitutiveModelFactory::create(ProblemSpecP& ps,
     computes_pLocalizedMPM = true;
     return(scinew Kayenta(child,flags));
   }
-//  else if (cm_type == "diamm"){
-//    return(scinew Diamm(child,flags));
-//  }
+  else if (cm_type == "diamm"){
+    return(scinew Diamm(child,flags));
+  }
 #endif
 
   else if (cm_type ==  "mw_visco_elastic"){
@@ -319,7 +320,12 @@ else if (cm_type == "HypoplasticB") {
   else if (cm_type == "MohrCoulomb") {
 	  return(scinew MohrCoulomb(child, flags));
   }
-
+  else if (cm_type == "BBM") {
+	  return(scinew BBM(child, flags));
+  }
+ else if (cm_type == "MatsuokaNakai") {
+  return(scinew MatsuokaNakai(child, flags));
+  }
   else if (cm_type == "QADamage") {
 	  if (flags->d_integrator_type == "explicit") {
 		  return(scinew QADamage(child, flags, false, false));

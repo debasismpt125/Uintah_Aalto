@@ -44,9 +44,10 @@
                                                                              ArrudaBoyce8,
                                                                              Kelvin_Voigt,
                                                                              Maxwell_Weichert,
-									     MohrCoulomb,
-									     HypoplasticB,
-									     QADamage">
+									                                         MohrCoulomb,
+									                                         HypoplasticB,
+									                                         QADamage,
+                                                                             BBM">
 
         <!-- Variable property UCNH -->
         <variable_properties       spec="OPTIONAL NO_DATA" >
@@ -1048,7 +1049,18 @@
 	<alpha       		   spec="OPTIONAL DOUBLE" need_applies_to="type QADamage"/>
 	<yield_stress          spec="OPTIONAL DOUBLE" need_applies_to="type QADamage"/>
 	<hardening_modulus     spec="OPTIONAL DOUBLE" need_applies_to="type QADamage"/>
+	  <!--______________________________________________________________________ -->
+	  <!-- The following are for the MatsuokaNakai model -->
+	  <!-- G - shear modulus, K - bulk modulus, Phi - friction angle, N - dilation 
+	note - some are repeated, but apparently there is no problem with that
+	as some of the names are already twice in the file
 
+	  <G        spec="OPTIONAL DOUBLE" need_applies_to="type MatsuokaNakai"/>
+	  <K        spec="OPTIONAL DOUBLE" need_applies_to="type MatsuokaNakai"/>
+	  <Phi_friction      spec="OPTIONAL DOUBLE" need_applies_to="type MatsuokaNakai"/>
+	  <N      spec="OPTIONAL DOUBLE" need_applies_to="type MatsuokaNakai"/>
+	  <lamda_c  spec="OPTIONAL DOUBLE" need_applies_to="type MatsuokaNakai"/>
+	  
 	 <!--______________________________________________________________________ -->
     <!-- The following are for the Mohr-Coulomb model -->
     <!-- G - shear modulus, K - bulk modulus, c-cohesion [all stress units]
@@ -1068,7 +1080,7 @@
     <A1                spec="OPTIONAL DOUBLE" need_applies_to="type MohrCoulomb"/>
     <B1                spec="OPTIONAL DOUBLE" need_applies_to="type MohrCoulomb"/>
     <W                 spec="OPTIONAL DOUBLE" need_applies_to="type MohrCoulomb"/>
-    <beta_rate              spec="OPTIONAL DOUBLE" need_applies_to="type MohrCoulomb"/>
+    <beta_rate         spec="OPTIONAL DOUBLE" need_applies_to="type MohrCoulomb"/>
     <strain_ref        spec="OPTIONAL DOUBLE" need_applies_to="type MohrCoulomb"/>
 
     <Usemodul  		   spec="OPTIONAL DOUBLE" need_applies_to="type MohrCoulomb"/>
@@ -1105,8 +1117,25 @@
 <!-- Version: 1- classic Mohr Coulomb, 11 - proper implementation (implicit)
 3- Sheng Mohr Coulomb -->
 
-
-
+<!--______________________________________________________________________ -->
+<!-- The following are for the BBM model -->
+   <G_BBM         spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <Kappa         spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <KappaS        spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <p_atm         spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <Lambda        spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <r             spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <BetaBBM       spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <p_c           spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <k             spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <M             spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <Non_Associated_Flow      spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <N_zero      spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <p_star      spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <suction      spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <p_initial      spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <BulkModulusK      spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <SpecificVolume      spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
+   <PMIN               spec="OPTIONAL DOUBLE" need_applies_to="type BBM"/>
   </constitutive_model>
-
 </Uintah_Include>
