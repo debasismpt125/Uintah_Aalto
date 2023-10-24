@@ -53,7 +53,7 @@ LD_LIBRARY_PATH=/usr/local/lib \
 ../src/configure --enable-debug --enable-all-components \
 --with-boost=/usr --enable-wasatch_3p
 
-**6. Compile  Uintah in computer**
+**6. Compile  Uintah**
 
 Create directory named opt
 cd to opt
