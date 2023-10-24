@@ -56,7 +56,9 @@ LD_LIBRARY_PATH=/usr/local/lib \
 **6. Compile  Uintah**
 
 Create directory named opt
+
 cd to opt
+
 ../src/configure '--enable-optimize=-O3 -mfpmath=sse' --enable-mpm --without-fortran --with-mpi-lib=/usr/lib/x86_64-linux-gnu/openmpi/lib --with-mpi-include=/usr/lib/x86_64-linux-gnu/openmpi/include F77=gfortran
 make
 
