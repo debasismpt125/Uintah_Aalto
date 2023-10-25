@@ -86,6 +86,6 @@ make
 
 **Running a simple example using sus**
 
-/Uintah-master-org/opt/StandAlone/sus  BreadcrumbsUintah_Geotech/src/StandAlone/inputs/MPM/fallcone.ups
+/Uintah-master-org/opt/StandAlone/sus        Uintah_Geotech/src/StandAlone/inputs/MPM/fallcone.ups
 
 
