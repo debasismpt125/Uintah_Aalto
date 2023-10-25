@@ -54,6 +54,7 @@ LD_LIBRARY_PATH=/usr/local/lib \
 --with-boost=/usr --enable-wasatch_3p
 
 **6. Compile  Uintah**
+
 Download Uintah
 
 Create directory named opt in the uintah folder
