@@ -84,6 +84,8 @@ cd hypre-2.18.2/src
 
 make
 
+**Running a simple example using sus**
 
+/Uintah-master-org/opt/StandAlone/sus  BreadcrumbsUintah_Geotech/src/StandAlone/inputs/MPM/fallcone.ups
 
 
