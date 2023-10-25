@@ -23,7 +23,7 @@
   </Time>
   
   <DataArchiver>
-    <filebase>fallcone1.uda</filebase>  
+    <filebase>fallcone.uda</filebase>  
     <outputInterval>1e-3</outputInterval>
     <save label = "p.x"/>
     <save label = "p.displacement"/>	
@@ -51,7 +51,7 @@
     <time_integrator>explicit</time_integrator>
     <interpolator>                   gimp    </interpolator>
     <minimum_particle_mass>          1.0e-50  </minimum_particle_mass>
-    <maximum_particle_velocity>      5.0     </maximum_particle_velocity>
+    <maximum_particle_velocity>      50.0     </maximum_particle_velocity>
     <minimum_mass_for_acc>           1.e-50  </minimum_mass_for_acc>
     <artificial_damping_coeff>       0.0     </artificial_damping_coeff>
     <artificial_viscosity>           false   </artificial_viscosity>
@@ -122,7 +122,7 @@
         <geom_object>
           <box label="clay">
               <min>           [0.0,0.0,0.0]   </min>
-              <max>           [0.02,0.015,0.0005]    </max>
+              <max>           [0.02,0.015,0.0001]    </max>
             </box>
           <res>[2,2,1]</res>
           <velocity>[0.0, 0.0, 0.0]</velocity>
@@ -134,7 +134,7 @@
         <type>friction_bard</type>
 		
         <materials>[0,1]</materials>
-		<mu>0.7</mu>
+		<mu>0.65</mu>
      </contact>
 	  
        </MPM>
@@ -170,8 +170,8 @@
        <Level>
            <Box label = "1">
               <lower>[0.0,0.0,0.0]</lower>
-              <upper>[0.020,0.031,0.0005]</upper>
-              <resolution>[40,62,1]</resolution>
+              <upper>[0.020,0.031,0.0001]</upper>
+              <resolution>[200,620,1]</resolution>
               <patches>[1,1,1]</patches>
               <extraCells> [1,1,1]            </extraCells>
            </Box>
