@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!-- <!DOCTYPE Uintah_specification SYSTEM "input.dtd"> -->
+<!-- @version: Updated 7/31/00-->
+<Uintah_specification>
+
+  <Meta>
+    <title>Fall cone test</title>
+  </Meta>
+ <LoadBalancer type="PLB">
+   <timestepInterval>50</timestepInterval>
+   <gainThreshold>0.15</gainThreshold>
+   <doSpaceCurve>true</doSpaceCurve>
+ </LoadBalancer>
+   <SimulationComponent type="mpm" />
+
+    <Time>
+    <maxTime>0.1</maxTime>
+    <initTime>0.0</initTime>
+    <delt_min>1.0e-8</delt_min>
+    <delt_max>1.0e-1</delt_max>
+    <delt_init>1.0e-5</delt_init>
+    <timestep_multiplier>0.6</timestep_multiplier>
+  </Time>
+  
+  <DataArchiver>
+    <filebase>fallcone1.uda</filebase>  
+    <outputInterval>1e-3</outputInterval>
+    <save label = "p.x"/>
+    <save label = "p.displacement"/>	
+    <save label = "p.velocity"/>
+    <save label = "p.mass"/>
+    <save label = "p.volume"/>
+    <save label = "p.particleID"/>
+	<save label = "p.externalforce"/>
+    <save label = "p.stress"/>
+    <save label = "g.mass"/>
+    <save label = "g.volume"/>
+	<save label = "g.acceleration"/>
+    <save label = "g.stressFS"/>
+	<save label = "shear_strain_rate"/>
+	<save label = "shear_strain"/>
+	<save label = "c"/>
+	<save label = "G"/>
+	<save label = "K"/>
+	
+
+    <checkpoint cycle = "2" timestepInterval = "1000"/>
+  </DataArchiver>
+
+  <MPM>
+    <time_integrator>explicit</time_integrator>
+    <interpolator>                   gimp    </interpolator>
+    <minimum_particle_mass>          1.0e-50  </minimum_particle_mass>
+    <maximum_particle_velocity>      5.0     </maximum_particle_velocity>
+    <minimum_mass_for_acc>           1.e-50  </minimum_mass_for_acc>
+    <artificial_damping_coeff>       0.0     </artificial_damping_coeff>
+    <artificial_viscosity>           false   </artificial_viscosity>
+    <do_contact_friction_heating>    false   </do_contact_friction_heating>
+    <DoExplicitHeatConduction>       false   </DoExplicitHeatConduction>
+    <temperature_solve>	             false   </temperature_solve>
+    <axisymmetric> 	 				 true	 </axisymmetric>
+
+  </MPM>
+
+    <PhysicalConstants>
+       <gravity>[0,-9.82,0]</gravity>
+    </PhysicalConstants>
+
+    <MaterialProperties>
+       <MPM>
+		<material name="cone">
+        <density> 5.0467e+04 </density>
+		<constitutive_model type="comp_neo_hook_plastic">
+            <bulk_modulus>80.0e7</bulk_modulus>
+            <shear_modulus>160.0e7</shear_modulus>
+            <yield_stress>550.0e5</yield_stress>
+            <hardening_modulus>161.0e3</hardening_modulus>
+            <alpha> 0.0 </alpha>
+        </constitutive_model>
+		
+		
+              <thermal_conductivity>174.0</thermal_conductivity>
+              <specific_heat>132</specific_heat>
+              <geom_object>
+			   
+		  <cone label = "cone">    
+              <bottom>           [0.0,0.015,0.0]   </bottom>
+              <top>              [0.0,0.030,0.0]    </top>
+              <top_radius>        0.0087             </top_radius>
+              <bottom_radius>     0.000           </bottom_radius>
+          </cone>
+                <res>[2,2,1]</res>
+                <velocity>[0.0,0.0,0.0]</velocity>
+                <temperature>300</temperature>
+              </geom_object>
+           </material>
+		   
+		<material name="Clay">
+        <density>1.45e3</density>
+       <constitutive_model type="MohrCoulomb">
+	        <Version>11</Version>
+            <Phi>0.0001</Phi>
+            <Psi>0.0</Psi>
+			<Usetransition>1</Usetransition>
+			<A1>5.75e2</A1>
+			<B1>0.0</B1>
+			<W>1.08</W>
+			<beta_rate>0.08</beta_rate>
+			<strain_ref>0.5</strain_ref>
+			<Usemodul>1</Usemodul>
+			<m_modul>500.0</m_modul>
+			<nuy>0.495</nuy>
+	        <Use_softening>1</Use_softening>
+			<St>10.0</St>
+			<strain_95>10</strain_95>	
+	    </constitutive_model>	
+	        
+	        
+		<thermal_conductivity>	174.0	</thermal_conductivity>
+        <specific_heat>		132.0	</specific_heat>
+
+        <geom_object>
+          <box label="clay">
+              <min>           [0.0,0.0,0.0]   </min>
+              <max>           [0.02,0.015,0.0001]    </max>
+            </box>
+          <res>[2,2,1]</res>
+          <velocity>[0.0, 0.0, 0.0]</velocity>
+          <temperature>294</temperature>
+        </geom_object>
+      </material>
+
+	<contact>
+        <type>friction_bard</type>
+		
+        <materials>[0,1]</materials>
+		<mu>0.7</mu>
+     </contact>
+	  
+       </MPM>
+    </MaterialProperties>
+
+    <Grid>
+       <BoundaryConditions>
+           <Face side = "x-">
+             <BCType id = "all" var = "symmetry" label = "Symmetric"> </BCType>
+           </Face>
+           <Face side = "x+">
+              <BCType id = "all" var = "Dirichlet" label = "Velocity">
+                <value> [0.0,0.0,0.0] </value>
+              </BCType>
+           </Face>
+      <Face side = "y-">
+        <BCType id = "all" var = "Dirichlet" label = "Velocity">
+          <value> [0.0,0.0,0.0] </value>
+        </BCType>
+      </Face>                        
+           <Face side = "y+">
+              <BCType id = "all" var = "Dirichlet" label = "Velocity">
+                 <value> [0.0,0.0,0.0] </value>
+             </BCType>
+           </Face>
+           <Face side = "z-">
+             <BCType id = "all" var = "symmetry" label = "Symmetric"> </BCType>
+           </Face>
+           <Face side = "z+">
+             <BCType id = "all" var = "symmetry" label = "Symmetric"> </BCType>
+           </Face>                           
+       </BoundaryConditions>
+       <Level>
+           <Box label = "1">
+              <lower>[0.0,0.0,0.0]</lower>
+              <upper>[0.020,0.031,0.0001]</upper>
+              <resolution>[200,620,1]</resolution>
+              <patches>[4,8,1]</patches>
+              <extraCells> [1,1,1]            </extraCells>
+           </Box>
+       </Level>
+    </Grid>
+
+</Uintah_specification>
