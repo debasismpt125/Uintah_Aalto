@@ -88,4 +88,6 @@ make
 
 /Uintah-master-org/opt/StandAlone/sus        Uintah_Geotech/src/StandAlone/inputs/MPM/fallcone.ups
 
+**Running a simple example using MPI**
 
+/usr/lib64/openmpi/bin/mpirun -np 16  /Uintah-master-org/opt/StandAlone/sus  Uintah_Geotech/src/StandAlone/inputs/MPM/fallcone1.ups
