@@ -78,7 +78,7 @@ cd hypre-2.18.2/src
     CC=mpicc \
     CXX=mpicx
 
-**Compile Uintah with Hypre**
+**Compile Uintah with Hypre (Optional)**
 
 ../src/configure '--enable-optimize=-O3 -mfpmath=sse' --enable-mpm  --enable-ice --without-fortran --with-mpi-lib=/usr/lib/x86_64-linux-gnu/openmpi/lib --with-mpi-include=/usr/lib/x86_64-linux-gnu/openmpi/include F77=gfortran  --with-hypre-lib=/home/debasis/Downloads/hypre-2.18.0/src/hypre/lib  --with-hypre-include=/home/debasis/Downloads/hypre-2.18.0/src/hypre/include
 
