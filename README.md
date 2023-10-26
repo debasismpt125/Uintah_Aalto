@@ -92,3 +92,10 @@ make
 **Running a simple example using MPI**
 
 /usr/lib64/openmpi/bin/mpirun -np 16  /Uintah_Geotech/opt/StandAlone/sus  Uintah_Geotech/src/StandAlone/inputs/MPM/fallcone1.ups
+
+
+# Adding new material to Uintah
+
+
+
+
