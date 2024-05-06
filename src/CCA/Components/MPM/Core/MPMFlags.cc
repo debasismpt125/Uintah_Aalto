@@ -101,6 +101,8 @@ MPMFlags::MPMFlags(const ProcessorGroup* myworld)
   d_GranularMPM_Vcriz                  =  1.00;
   d_exactDeformation                   =  false;
   d_insertParticles                    =  false;
+  d_insertGravity                      =  false;
+  d_insertUndrainedShearStrength       = false;
   d_doGridReset                        =  true;
   d_min_part_mass                      =  3.e-15;
   d_min_subcycles_for_F                =  1;
