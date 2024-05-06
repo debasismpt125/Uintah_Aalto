@@ -280,7 +280,9 @@ void SerialMPM::problemSetup(const ProblemSpecP& prob_spec,
   if (flags->d_insertParticles){
     readInsertParticlesFile(flags->d_insertParticlesFile);
   }
-
+  if (flags->d_insertGravity){
+    readInsertGravityFile(flags->d_insertGravityFile);
+  }
   setParticleGhostLayer(Ghost::AroundNodes, NGP);
 
   MPMPhysicalBCFactory::create(restart_mat_ps, grid, flags);
@@ -2654,6 +2656,25 @@ void SerialMPM::readInsertParticlesFile(string filename)
             d_IPColor.push_back(color);
             d_IPTranslate.push_back(Vector(transx,transy,transz));
             d_IPVelNew.push_back(Vector(v_new_x,v_new_y,v_new_z));
+        }
+    }
+  }
+}
+void SerialMPM::readInsertGravityFile(string filename)
+{
+
+ if(filename!="") {
+    std::ifstream is(filename.c_str());
+    if (!is ){
+      throw ProblemSetupException("ERROR Opening particle insertion file '"+filename+"'\n",
+                                  __FILE__, __LINE__);
+    }
+    while(is) {
+        double t,G_x,G_y,G_z;
+        is >> t >> G_x >> G_y >> G_z;
+        if(is) {
+            d_G_Times.push_back(t);
+            d_Gravity_New.push_back(Vector(G_x,G_y,G_z));
         }
     }
   }
