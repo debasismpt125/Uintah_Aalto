@@ -277,6 +277,15 @@ MPMFlags::readMPMFlags(ProblemSpecP& ps, Output* dataArchive)
   if(d_insertParticles){
     mpm_flag_ps->require("InsertParticlesFile",d_insertParticlesFile);
   }
+    mpm_flag_ps->get("InsertGravity",d_insertGravity);
+  if(d_insertGravity){
+    mpm_flag_ps->require("InsertGravityFile",d_insertGravityFile);
+  }
+
+  mpm_flag_ps->get("InsertUndrainedShearStrength", d_insertUndrainedShearStrength);
+  if (d_insertUndrainedShearStrength) {
+      mpm_flag_ps->require("InsertUndrainedShearStrengthFile", d_insertUndrainedShearStrengthFile);
+  }
 
   mpm_flag_ps->get("do_contact_friction_heating",d_do_contact_friction);
   mpm_flag_ps->get("computeNormals",             d_computeNormals);
