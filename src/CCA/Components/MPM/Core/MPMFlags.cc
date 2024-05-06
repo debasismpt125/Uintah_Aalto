@@ -486,7 +486,15 @@ MPMFlags::outputProblemSpec(ProblemSpecP& ps)
   if(d_insertParticles){
     ps->appendElement("InsertParticlesFile",d_insertParticlesFile);
   }
+  ps->appendElement("InsertGravity",d_insertGravity);
+  if(d_insertGravity){
+    ps->appendElement("InsertGravityFile",d_insertGravityFile);
+  }
 
+  ps->appendElement("InsertUndrainedShearStrength", d_insertUndrainedShearStrength);
+  if (d_insertUndrainedShearStrength) {
+      ps->appendElement("InsertUndrainedShearStrengthFile", d_insertUndrainedShearStrengthFile);
+  }
   ps->appendElement("do_contact_friction_heating",d_do_contact_friction);
   ps->appendElement("computeNormals",             d_computeNormals);
   ps->appendElement("useLogisticRegression",       d_useLogisticRegression);
